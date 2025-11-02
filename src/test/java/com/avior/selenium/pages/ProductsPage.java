@@ -12,7 +12,6 @@ public class ProductsPage {
     }
 
     public boolean isPageOpened() {
-
         return driver.getCurrentUrl().contains("inventory.html");
     }
 
