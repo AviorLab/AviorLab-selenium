@@ -31,8 +31,6 @@ public class PageObjectModelTest {
         checkoutPage = new CheckoutPage(driver);
         finalCheckoutPage = new FinalCheckoutPage(driver);
         orderCompletionPage = new OrderCompletionPage(driver);
-
-
         driver.get(SITE);
     }
 

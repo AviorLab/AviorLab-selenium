@@ -3,12 +3,20 @@ package com.avior.selenium.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
 
 public class ProductsPage {
-    private final WebDriver driver;
+    private  WebDriver driver;
+
+    @FindBy (css = ".shopping_cart_link")
+    private  WebElement  cartButton;
 
     public ProductsPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
+
     }
 
     public boolean isPageOpened() {
@@ -21,7 +29,6 @@ public class ProductsPage {
     }
 
     public void navigateToCart() {
-        WebElement cartButton = driver.findElement(By.cssSelector(".shopping_cart_link"));
         cartButton.click();
     }
 }

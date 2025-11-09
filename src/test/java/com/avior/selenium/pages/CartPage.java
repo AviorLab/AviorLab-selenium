@@ -3,12 +3,22 @@ package com.avior.selenium.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class CartPage {
+
     private WebDriver driver;
+
+    @FindBy (css = ".shopping_cart_badge")
+    private  WebElement  cartItemCount;
+
+    @FindBy (css = ".btn_action")
+    private  WebElement  continueButton;
 
     public CartPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     public boolean isPageOpened() {
@@ -16,7 +26,7 @@ public class CartPage {
     }
 
     public String getCartItemCount() {
-        return driver.findElement(By.cssSelector(".shopping_cart_badge")).getText();
+        return cartItemCount.getText();
     }
 
     public boolean productInCart(String productName) {
@@ -27,10 +37,10 @@ public class CartPage {
     }
 
     public String getContinueButtonText() {
-        return driver.findElement(By.cssSelector(".btn_action")).getText();
+        return continueButton.getText();
     }
 
     public void continueCheckout() {
-        driver.findElement(By.cssSelector(".btn_action")).click();
+        continueButton.click();
     }
 }

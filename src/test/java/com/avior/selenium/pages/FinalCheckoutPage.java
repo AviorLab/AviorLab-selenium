@@ -1,33 +1,51 @@
 package com.avior.selenium.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class FinalCheckoutPage {
 
     private WebDriver driver;
 
+    // ===== Locators using @FindBy =====
+    @FindBy(css = ".summary_value_label[data-test='payment-info-value']")
+    private WebElement paymentInfoValue;
+
+    @FindBy(css = ".summary_value_label[data-test='shipping-info-value']")
+    private WebElement shippingInfoValue;
+
+    @FindBy(css = ".summary_total_label[data-test='total-label']")
+    private WebElement totalLabel;
+
+    @FindBy(id = "finish")
+    private WebElement finishButton;
+
+    // ===== Constructor =====
     public FinalCheckoutPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
+
+    // ===== Page Actions =====
     public boolean isPageOpened() {
         return driver.getCurrentUrl().contains("checkout-step-two.html");
     }
+
     public String getPaymentInfoValue() {
-        return driver.findElement(By.cssSelector(
-                ".summary_value_label[data-test='payment-info-value']")).getText();
+        return paymentInfoValue.getText();
     }
+
     public String getShippingInfoValue() {
-        return driver.findElement(By.cssSelector(
-                ".summary_value_label[data-test='shipping-info-value']")).getText();
+        return shippingInfoValue.getText();
     }
 
     public String getTotalLabel() {
-        return driver.findElement(By.cssSelector(
-                ".summary_total_label[data-test='total-label']")).getText();
+        return totalLabel.getText();
     }
 
     public void finishCheckout() {
-        driver.findElement(By.id("finish")).click();
+        finishButton.click();
     }
 }
