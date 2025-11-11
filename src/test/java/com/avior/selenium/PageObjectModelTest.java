@@ -7,7 +7,10 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import io.qameta.allure.*;
 
+
+@Epic("Checkout flow on Saucedemo")
 public class PageObjectModelTest {
 
     private static final String SITE = "https://www.saucedemo.com/";
@@ -42,12 +45,21 @@ public class PageObjectModelTest {
         }
     }
 
+    @Feature("Login flow")
+    @Story("Login")
+    @Description("Test to verify login functionality")
+    @Severity(SeverityLevel.BLOCKER)
     @Test
     public void testLogin() {
         loginPage.login("standard_user", "secret_sauce");
         Assert.assertTrue(productsPage.isPageOpened(), "Login failed!");
         delay();
     }
+
+    @Feature("Add products flow")
+    @Story("Add products")
+    @Description("Test to add a backpack to the cart")
+    @Severity(SeverityLevel.NORMAL)
     @Test(dependsOnMethods = "testLogin")
     public void testAddBackpackToCart() {
         productsPage.navigateToProductPage("Sauce Labs Backpack");
@@ -57,6 +69,10 @@ public class PageObjectModelTest {
         driver.navigate().back();
     }
 
+    @Feature("Add products flow")
+    @Story("Add products")
+    @Description("Test to add a fleece jacket to the cart")
+    @Severity(SeverityLevel.NORMAL)
     @Test(dependsOnMethods = "testAddBackpackToCart")
     public void testAddFleeceJacketToCart() {
         productsPage.navigateToProductPage("Sauce Labs Fleece Jacket");
@@ -66,52 +82,56 @@ public class PageObjectModelTest {
         driver.navigate().back();
     }
 
+    @Feature("View cart flow")
+    @Story("View cart")
+    @Description("Test to verify the cart contents")
+    @Severity(SeverityLevel.MINOR)
     @Test(dependsOnMethods = {"testAddBackpackToCart", "testAddFleeceJacketToCart"})
     public void testCart() {
         productsPage.navigateToCart();
-
         Assert.assertTrue(cartPage.isPageOpened(), "Cart page not loaded");
         Assert.assertEquals(cartPage.getCartItemCount(), "2", "Incorrect number of items in the cart");
         Assert.assertEquals(cartPage.getContinueButtonText(), "Checkout", "Incorrect button text on the cart page");
-
         Assert.assertTrue(cartPage.productInCart("Sauce Labs Backpack"));
         Assert.assertTrue(cartPage.productInCart("Sauce Labs Fleece Jacket"));
-
         delay();
     }
+
+    @Feature("Checkout flow")
+    @Story("Checkout")
+    @Description("Test to verify the checkout functionality")
     @Test(dependsOnMethods = "testCart")
     public void testCheckout() {
         cartPage.continueCheckout();
-
         Assert.assertTrue(checkoutPage.isPageOpened(), "Checkout page not loaded");
         checkoutPage.enterDetails("Peter", "Hank", "12345");
-
         Assert.assertEquals(checkoutPage.getFirstNameFieldValue(), "Peter", "First name field value is incorrect");
         Assert.assertEquals(checkoutPage.getLastNameFieldValue(), "Hank", "Last name field value is incorrect");
         Assert.assertEquals(checkoutPage.getZipCodeFieldValue(), "12345", "Zip code field value is incorrect");
-
         delay();
     }
+
+    @Feature("Checkout flow")
+    @Story("Checkout")
     @Test(dependsOnMethods = "testCheckout")
     public void testFinalCheckout() {
         checkoutPage.continueCheckout();
-
         Assert.assertTrue(finalCheckoutPage.isPageOpened(), "Checkout page not loaded");
         Assert.assertEquals(finalCheckoutPage.getPaymentInfoValue(), "SauceCard #31337");
         Assert.assertEquals(finalCheckoutPage.getShippingInfoValue(), "Free Pony Express Delivery!");
         Assert.assertEquals(finalCheckoutPage.getTotalLabel(), "Total: $86.38");
-
         delay();
     }
 
+    @Feature("Checkout flow")
+    @Story("Order completion")
+    @Description("Test to verify the order completion functionality")
     @Test(dependsOnMethods = "testFinalCheckout")
     public void testOrderCompletion() {
         finalCheckoutPage.finishCheckout();
-
         Assert.assertEquals(orderCompletionPage.getHeaderText(), "Thank you for your order!");
         Assert.assertEquals(orderCompletionPage.getBodyText(),
                 "Your order has been dispatched, and will arrive just as fast as the pony can get there!");
-
         delay();
     }
 
