@@ -26,7 +26,6 @@ public class DriverFactory {
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--start-maximized");
                 driver = new ChromeDriver(chromeOptions);
-
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
                 break;
             case FIREFOX:

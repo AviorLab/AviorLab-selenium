@@ -5,11 +5,15 @@ import com.avior.selenium.utils.DriverFactory;
 import io.qameta.allure.testng.Tag;
 import io.qameta.allure.testng.Tags;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import io.qameta.allure.*;
+
+import java.time.Duration;
 
 @Epic("Checkout flow on Saucedemo")
 @Owner("Avior Kasay")
@@ -74,7 +78,12 @@ public class PageObjectModelTest {
     public void testAddBackpackToCart() {
         Allure.step("Navigate to product and add to cart", () -> {
             productsPage.navigateToProductPage("Sauce Labs Backpack");
+            System.out.println("Before click: " + productPage.getButtonText());
             productPage.addToCart();
+            System.out.println("After click: " + productPage.getButtonText());
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds( 5));
+            wait.until(ExpectedConditions.textToBePresentInElement(productPage.getCartButtonElement(), "Remove"));
+
             Assert.assertEquals(productPage.getButtonText(), "Remove", "Button text did not change");
             Allure.addAttachment("Product added", "Sauce Labs Backpack");
         });

@@ -27,4 +27,9 @@ public class ProductPage {
     public String getButtonText() {
         return cartButton.getText();
     }
+
+
+    public  WebElement  getCartButtonElement() {
+        return cartButton;
+    }
 }
