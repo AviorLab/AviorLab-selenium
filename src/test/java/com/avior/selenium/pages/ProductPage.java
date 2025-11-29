@@ -10,8 +10,12 @@ public class ProductPage {
 
     private WebDriver driver;
 
-    @FindBy(css = ".btn_inventory")
-    private  WebElement  cartButton;
+    @FindBy(css = ".btn.btn_primary.btn_small.btn_inventory")
+    private  WebElement  addToCartButton;
+
+    @FindBy(css = ".btn.btn_secondary.btn_small.btn_inventory")
+    private  WebElement  removeButton;
+
 
 
     public ProductPage(WebDriver driver) {
@@ -20,16 +24,16 @@ public class ProductPage {
 
     }
 
-    public void addToCart() {
-        cartButton.click();
+    public void clickAddToCart() {
+        addToCartButton.click();
     }
 
-    public String getButtonText() {
-        return cartButton.getText();
+    public String getRemoveButtonText() {
+        return removeButton.getText();
     }
 
-
-    public  WebElement  getCartButtonElement() {
-        return cartButton;
+    public WebElement getRemoveButtonElement() {
+        return removeButton;
     }
+
 }

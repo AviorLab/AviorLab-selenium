@@ -75,16 +75,14 @@ public class PageObjectModelTest {
     @Owner("Avior Kasay")
     @Step("Add backpack to cart and verify")
     @Test(dependsOnMethods = "testLogin")
+
     public void testAddBackpackToCart() {
         Allure.step("Navigate to product and add to cart", () -> {
             productsPage.navigateToProductPage("Sauce Labs Backpack");
-            System.out.println("Before click: " + productPage.getButtonText());
-            productPage.addToCart();
-            System.out.println("After click: " + productPage.getButtonText());
+            productPage.clickAddToCart();
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds( 5));
-            wait.until(ExpectedConditions.textToBePresentInElement(productPage.getCartButtonElement(), "Remove"));
-
-            Assert.assertEquals(productPage.getButtonText(), "Remove", "Button text did not change");
+            wait.until(ExpectedConditions.textToBePresentInElement(productPage.getRemoveButtonElement(), "Remove"));
+            Assert.assertEquals(productPage.getRemoveButtonText(), "Remove", "Button text did not change");
             Allure.addAttachment("Product added", "Sauce Labs Backpack");
         });
         delay();
@@ -98,11 +96,15 @@ public class PageObjectModelTest {
     @Tags({@Tag("add"), @Tag("cart")})
     @Step("Add fleece jacket to cart and verify")
     @Test(dependsOnMethods = "testAddBackpackToCart")
+
     public void testAddFleeceJacketToCart() {
         Allure.step("Navigate to fleece jacket and add to cart", () -> {
             productsPage.navigateToProductPage("Sauce Labs Fleece Jacket");
-            productPage.addToCart();
-            Assert.assertEquals(productPage.getButtonText(), "Remove", "Button text did not change");
+            productPage.clickAddToCart();
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds( 5));
+            wait.until(ExpectedConditions.textToBePresentInElement(productPage.getRemoveButtonElement(), "Remove"));
+
+            Assert.assertEquals(productPage.getRemoveButtonText(), "Remove", "Button text did not change");
             Allure.addAttachment("Product added", "Sauce Labs Fleece Jacket");
         });
         delay();
