@@ -82,6 +82,7 @@ public class PageObjectModelTest {
             productPage.clickAddToCart();
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds( 5));
             wait.until(ExpectedConditions.textToBePresentInElement(productPage.getRemoveButtonElement(), "Remove"));
+
             Assert.assertEquals(productPage.getRemoveButtonText(), "Remove", "Button text did not change");
             Allure.addAttachment("Product added", "Sauce Labs Backpack");
         });

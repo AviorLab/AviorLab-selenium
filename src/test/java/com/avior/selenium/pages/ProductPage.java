@@ -10,13 +10,11 @@ public class ProductPage {
 
     private WebDriver driver;
 
-    @FindBy(css = ".btn.btn_primary.btn_small.btn_inventory")
+    @FindBy(id = "add-to-cart")
     private  WebElement  addToCartButton;
 
-    @FindBy(css = ".btn.btn_secondary.btn_small.btn_inventory")
+    @FindBy(id = "remove")
     private  WebElement  removeButton;
-
-
 
     public ProductPage(WebDriver driver) {
         this.driver = driver;
