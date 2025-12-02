@@ -10,28 +10,22 @@ public class ProductPage {
 
     private WebDriver driver;
 
-    @FindBy(id = "add-to-cart")
-    private  WebElement  addToCartButton;
+    @FindBy(css = ".btn_inventory")
+    private  WebElement  cartButton;
 
-    @FindBy(id = "remove")
-    private  WebElement  removeButton;
 
     public ProductPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-
     }
 
-    public void clickAddToCart() {
-        addToCartButton.click();
+    public void addToCart() {
+        cartButton.click();
     }
 
-    public String getRemoveButtonText() {
-        return removeButton.getText();
+    public String getButtonText() {
+        return cartButton.getText();
     }
 
-    public WebElement getRemoveButtonElement() {
-        return removeButton;
-    }
 
 }

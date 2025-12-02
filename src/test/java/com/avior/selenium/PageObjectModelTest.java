@@ -79,11 +79,8 @@ public class PageObjectModelTest {
     public void testAddBackpackToCart() {
         Allure.step("Navigate to product and add to cart", () -> {
             productsPage.navigateToProductPage("Sauce Labs Backpack");
-            productPage.clickAddToCart();
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds( 5));
-            wait.until(ExpectedConditions.textToBePresentInElement(productPage.getRemoveButtonElement(), "Remove"));
-
-            Assert.assertEquals(productPage.getRemoveButtonText(), "Remove", "Button text did not change");
+            productPage.addToCart();
+            Assert.assertEquals(productPage.getButtonText(), "Remove", "Button text did not change");
             Allure.addAttachment("Product added", "Sauce Labs Backpack");
         });
         delay();
@@ -101,11 +98,8 @@ public class PageObjectModelTest {
     public void testAddFleeceJacketToCart() {
         Allure.step("Navigate to fleece jacket and add to cart", () -> {
             productsPage.navigateToProductPage("Sauce Labs Fleece Jacket");
-            productPage.clickAddToCart();
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds( 5));
-            wait.until(ExpectedConditions.textToBePresentInElement(productPage.getRemoveButtonElement(), "Remove"));
-
-            Assert.assertEquals(productPage.getRemoveButtonText(), "Remove", "Button text did not change");
+            productPage.addToCart();
+            Assert.assertEquals(productPage.getButtonText(), "Remove", "Button text did not change");
             Allure.addAttachment("Product added", "Sauce Labs Fleece Jacket");
         });
         delay();
@@ -121,6 +115,7 @@ public class PageObjectModelTest {
     @Owner("Avior Kasay")
     @Step("Validate items in cart")
     @Test(dependsOnMethods = {"testAddBackpackToCart", "testAddFleeceJacketToCart"})
+
     public void testCart() {
         Allure.step("Navigate to cart and verify state", () -> {
             productsPage.navigateToCart();
@@ -146,6 +141,7 @@ public class PageObjectModelTest {
     @Owner("Avior Kasay")
     @Step("Fill checkout information and verify details")
     @Test(dependsOnMethods = "testCart")
+
     public void testCheckout() {
         Allure.step("Proceed to checkout page and fill details", () -> {
             cartPage.continueCheckout();
