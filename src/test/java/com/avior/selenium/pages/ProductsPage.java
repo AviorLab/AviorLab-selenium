@@ -18,6 +18,10 @@ public class ProductsPage {
         PageFactory.initElements(driver, this);
 
     }
+    public void resetState() {
+        driver.findElement(By.id("react-burger-menu-btn")).click();
+        driver.findElement(By.id("reset_sidebar_link")).click();
+    }
 
     public boolean isPageOpened() {
         return driver.getCurrentUrl().contains("inventory.html");
