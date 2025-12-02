@@ -78,6 +78,8 @@ public class PageObjectModelTest {
 
     public void testAddBackpackToCart() {
         Allure.step("Navigate to product and add to cart", () -> {
+            productsPage.resetState();
+
             productsPage.navigateToProductPage("Sauce Labs Backpack");
             productPage.addToCart();
             Assert.assertEquals(productPage.getButtonText(), "Remove", "Button text did not change");
@@ -97,6 +99,8 @@ public class PageObjectModelTest {
 
     public void testAddFleeceJacketToCart() {
         Allure.step("Navigate to fleece jacket and add to cart", () -> {
+            productsPage.resetState();
+
             productsPage.navigateToProductPage("Sauce Labs Fleece Jacket");
             productPage.addToCart();
             Assert.assertEquals(productPage.getButtonText(), "Remove", "Button text did not change");
