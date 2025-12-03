@@ -5,10 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 
 public class ProductsPage {
@@ -21,20 +17,6 @@ public class ProductsPage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
 
-    }
-    public void resetState() {
-        // פותח את התפריט
-        WebElement menuBtn = driver.findElement(By.id("react-burger-menu-btn"));
-        menuBtn.click();
-
-        // מחכה שהכפתור של reset יהיה באמת קליקבילי
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        WebElement resetLink = wait.until(
-                ExpectedConditions.elementToBeClickable(By.id("reset_sidebar_link"))
-        );
-
-        // לוחץ על RESET
-        resetLink.click();
     }
     public boolean isPageOpened() {
         return driver.getCurrentUrl().contains("inventory.html");

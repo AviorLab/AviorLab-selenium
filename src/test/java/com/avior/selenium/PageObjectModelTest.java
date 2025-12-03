@@ -66,29 +66,27 @@ public class PageObjectModelTest {
         });
         delay();
     }
-//
-//    @Feature("Add products flow")
-//    @Story("Add products")
-//    @Description("Test to add a backpack to the cart")
-//    @Severity(SeverityLevel.NORMAL)
-//    @Tags({@Tag("add"), @Tag("cart")})
-//    @Owner("Avior Kasay")
-//    @Step("Add backpack to cart and verify")
-//    @Test(dependsOnMethods = "testLogin")
-//
-//    public void testAddBackpackToCart() {
-//        Allure.step("Navigate to product and add to cart", () -> {
-//            productsPage.resetState();
-//
-//            productsPage.navigateToProductPage("Sauce Labs Backpack");
-//            productPage.addToCart();
-//            Assert.assertEquals(productPage.getButtonText(), "Remove", "Button text did not change");
-//            Allure.addAttachment("Product added", "Sauce Labs Backpack");
-//        });
-//        delay();
-//        driver.navigate().back();
-//    }
-//
+
+    @Feature("Add products flow")
+    @Story("Add products")
+    @Description("Test to add a backpack to the cart")
+    @Severity(SeverityLevel.NORMAL)
+    @Tags({@Tag("add"), @Tag("cart")})
+    @Owner("Avior Kasay")
+    @Step("Add backpack to cart and verify")
+    @Test(dependsOnMethods = "testLogin")
+
+    public void testAddBackpackToCart() {
+
+            productsPage.navigateToProductPage("Sauce Labs Backpack");
+            productPage.addToCart();
+            Assert.assertEquals(productPage.getButtonText(), "Remove", "Button text did not change");
+             delay();
+            Allure.step("NAVIGATE back to products page");
+
+       driver.navigate().back();
+    }
+
 //    @Feature("Add products flow")
 //    @Story("Add products")
 //    @Description("Test to add a fleece jacket to the cart")
