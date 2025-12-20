@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Saucedemo Test Suite">
 
-    <test verbose="2" name="/Users/avior/IdeaProjects/AviorLab-selenium">
+<suite name="Saucedemo - Checkout Flow">
+
+    <test name="Checkout Flow Test">
         <classes>
-            <class name="com.avior.selenium.PageObjectModelTest">
-                <methods>
-                    <include name="testLogin"/>
-                    <include name="testAddBackpackToCart"/>
-                    <include name="testAddFleeceJacketToCart"/>
-                    <include name="testCart"/>
-                    <include name="testCheckout"/>
-                    <include name="testFinalCheckout"/>
-                    <include name="testOrderCompletion"/>
-                </methods>
-            </class>
+            <class name="com.avior.selenium.CheckoutFlowTest"/>
         </classes>
     </test>
+
 </suite>

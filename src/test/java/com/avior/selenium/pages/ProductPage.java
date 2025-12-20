@@ -13,7 +13,6 @@ public class ProductPage {
     @FindBy(css = ".btn_inventory")
     private  WebElement  cartButton;
 
-
     public ProductPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
